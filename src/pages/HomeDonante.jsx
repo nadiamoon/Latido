@@ -1,7 +1,22 @@
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { supabase } from '../supabase'
 
 function HomeDonante() {
   const navigate = useNavigate()
+  const [perfil, setPerfil] = useState(null)
+
+  useEffect(() => {
+    const cargarPerfil = async () => {
+      const { data: { user } } = await supabase.auth.getUser()
+      if (user) {
+        const { data } = await supabase.from('perfiles').select('*').eq('id', user.id).single()
+        setPerfil(data)
+      }
+    }
+    cargarPerfil()
+  }, [])
+
   return (
     <div style={{
       minHeight: '100vh',
@@ -23,7 +38,7 @@ function HomeDonante() {
         }}>
           <div>
             <div style={{ fontSize: '12px', color: '#E8D5B7', opacity: 0.6 }}>Hola de nuevo,</div>
-            <div style={{ fontSize: '20px', color: '#FAF6F0', fontWeight: '600' }}>María</div>
+            <div style={{ fontSize: '20px', color: '#FAF6F0', fontWeight: '600' }}>{perfil ? perfil.nombre : '...'}</div>
           </div>
           <div style={{
             width: '40px', height: '40px',

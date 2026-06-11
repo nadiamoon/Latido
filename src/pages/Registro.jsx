@@ -20,20 +20,26 @@ function Registro() {
     setCargando(true)
     setError('')
 
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: { nombre, ciudad, rol }
-      }
-    })
+    const { data, error } = await supabase.auth.signUp({
+  email,
+  password,
+  options: {
+    data: { nombre, ciudad, rol }
+  }
+})
 
-    if (error) {
-      setError(error.message)
-      setCargando(false)
-    } else {
-      navigate('/home')
-    }
+if (error) {
+  setError(error.message)
+  setCargando(false)
+} else {
+  await supabase.from('perfiles').insert({
+    id: data.user.id,
+    nombre,
+    ciudad,
+    rol
+  })
+ navigate('/registro-perro')
+}
   }
 
   return (
