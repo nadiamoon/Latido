@@ -6,6 +6,7 @@ import Registro from './pages/Registro'
 import Mapa from './pages/Mapa'
 import Alertas from './pages/Alertas'
 import Perfil from './pages/Perfil'
+import Login from './pages/Login'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/mapa" element={<Mapa />} />
         <Route path="/alertas" element={<Alertas />} />
         <Route path="/perfil" element={<Perfil />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>
   )

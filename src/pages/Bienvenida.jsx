@@ -56,7 +56,7 @@ function Bienvenida() {
       </button>
 
       <button
-        onClick={() => navigate('/home')}
+        onClick={() => navigate('/login')}
         style={{
           width: '100%',
           maxWidth: '320px',
