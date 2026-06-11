@@ -5,7 +5,8 @@ import { supabase } from '../supabase'
 function Perfil() {
   const navigate = useNavigate()
   const [perfil, setPerfil] = useState(null)
-  const [email, setEmail] = useState('')
+const [email, setEmail] = useState('')
+const [perro, setPerro] = useState(null)
 
   useEffect(() => {
     const cargarPerfil = async () => {
@@ -13,7 +14,10 @@ function Perfil() {
       if (user) {
         setEmail(user.email)
         const { data } = await supabase.from('perfiles').select('*').eq('id', user.id).single()
-        setPerfil(data)
+setPerfil(data)
+
+const { data: dataPerro } = await supabase.from('perros').select('*').eq('duenio_id', user.id).single()
+setPerro(dataPerro)
       }
     }
     cargarPerfil()
@@ -37,20 +41,30 @@ function Perfil() {
           {email} · {perfil ? perfil.ciudad : ''}
         </div>
         <div style={{ fontSize: '11px', fontWeight: '500', padding: '4px 14px', background: '#C4623A', color: 'white', borderRadius: '20px' }}>
-          {perfil ? perfil.rol.charAt(0).toUpperCase() + perfil.rol.slice(1) : ''}
-        </div>
+  {perfil ? perfil.rol.charAt(0).toUpperCase() + perfil.rol.slice(1) : ''}
+</div>
+
+{perro && (
+  <div style={{ background: 'rgba(255,255,255,0.08)', borderRadius: '16px', padding: '12px 16px', display: 'flex', alignItems: 'center', gap: '12px', border: '1px solid rgba(255,255,255,0.1)', width: '100%', marginTop: '8px' }}>
+    <div style={{ width: '40px', height: '40px', background: '#F5E0D6', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '20px' }}>🦮</div>
+    <div style={{ flex: 1 }}>
+      <div style={{ fontSize: '15px', color: '#FAF6F0', fontWeight: '600' }}>{perro.nombre}</div>
+      <div style={{ fontSize: '11px', color: '#E8D5B7', opacity: 0.6, marginTop: '2px' }}>{perro.raza} · {perro.edad} años · {perro.peso}kg · {perro.tipo_sangre}</div>
+    </div>
+  </div>
+)}
       </div>
 
       {/* MENU */}
       <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
         {[
-          { icon: '🦮', label: 'Mi perro' },
+          { icon: '🦮', label: perro ? `Mi perro — ${perro.nombre}` : 'Registrar mi perro', path: '/registro-perro' },
           { icon: '📄', label: 'Mis documentos' },
           { icon: '🔔', label: 'Notificaciones' },
           { icon: '💳', label: 'Suscripción' },
           { icon: '⚙️', label: 'Configuración' },
         ].map((item) => (
-          <div key={item.label} style={{ background: 'white', borderRadius: '14px', padding: '14px 16px', display: 'flex', alignItems: 'center', gap: '12px', boxShadow: '0 2px 8px rgba(61,35,20,0.05)', cursor: 'pointer' }}>
+  <div key={item.label} onClick={() => item.path && navigate(item.path)} style={{ background: 'white', borderRadius: '14px', padding: '14px 16px', display: 'flex', alignItems: 'center', gap: '12px', boxShadow: '0 2px 8px rgba(61,35,20,0.05)', cursor: 'pointer' }}>
             <span style={{ fontSize: '20px' }}>{item.icon}</span>
             <span style={{ fontSize: '14px', color: '#3D2314', fontWeight: '500' }}>{item.label}</span>
             <span style={{ marginLeft: 'auto', color: '#C4623A', opacity: 0.5 }}>›</span>
