@@ -3,6 +3,9 @@ import Bienvenida from './pages/Bienvenida'
 import HomeDonante from './pages/HomeDonante'
 import Urgencia from './pages/Urgencia'
 import Registro from './pages/Registro'
+import Mapa from './pages/Mapa'
+import Alertas from './pages/Alertas'
+import Perfil from './pages/Perfil'
 
 function App() {
   return (
@@ -12,6 +15,9 @@ function App() {
         <Route path="/home" element={<HomeDonante />} />
         <Route path="/urgencia" element={<Urgencia />} />
         <Route path="/registro" element={<Registro />} />
+        <Route path="/mapa" element={<Mapa />} />
+        <Route path="/alertas" element={<Alertas />} />
+        <Route path="/perfil" element={<Perfil />} />
       </Routes>
     </BrowserRouter>
   )

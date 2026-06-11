@@ -1,4 +1,6 @@
+import { useNavigate } from 'react-router-dom'
 function Urgencia() {
+  const navigate = useNavigate()
   return (
     <div style={{
       minHeight: '100vh',
@@ -21,7 +23,9 @@ function Urgencia() {
           top: '-40px', right: '-30px'
         }}></div>
 
-        <div style={{ fontSize: '20px', color: 'rgba(255,255,255,0.7)', marginBottom: '12px', cursor: 'pointer' }}>←</div>
+        <div
+  onClick={() => navigate(-1)}
+  style={{ fontSize: '20px', color: 'rgba(255,255,255,0.7)', marginBottom: '12px', cursor: 'pointer' }}>←</div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <div style={{

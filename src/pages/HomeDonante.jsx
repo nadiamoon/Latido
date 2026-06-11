@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom'
+
 function HomeDonante() {
-    const navigate = useNavigate()
+  const navigate = useNavigate()
   return (
     <div style={{
       minHeight: '100vh',
@@ -32,7 +33,6 @@ function HomeDonante() {
           }}>🐕</div>
         </div>
 
-        {/* TARJETA PERRO */}
         <div style={{
           background: 'rgba(255,255,255,0.08)',
           borderRadius: '16px', padding: '14px 16px',
@@ -60,7 +60,6 @@ function HomeDonante() {
       {/* BODY */}
       <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
 
-        {/* URGENCIA */}
         <div>
           <div style={{ fontSize: '11px', fontWeight: '500', textTransform: 'uppercase', letterSpacing: '1.5px', color: '#7A4528', opacity: 0.6, marginBottom: '8px' }}>
             Urgencia cercana
@@ -82,13 +81,13 @@ function HomeDonante() {
               </div>
             </div>
             <div style={{ display: 'flex', gap: '8px', marginTop: '12px' }}>
-             <button
-  onClick={() => navigate('/urgencia')}
-  style={{
-    flex: 1, padding: '10px', background: '#C0392B',
-    color: 'white', border: 'none', borderRadius: '12px',
-    fontSize: '12px', fontWeight: '500', cursor: 'pointer'
-  }}>Puedo ayudar</button>
+              <button
+                onClick={() => navigate('/urgencia')}
+                style={{
+                  flex: 1, padding: '10px', background: '#C0392B',
+                  color: 'white', border: 'none', borderRadius: '12px',
+                  fontSize: '12px', fontWeight: '500', cursor: 'pointer'
+                }}>Puedo ayudar</button>
               <button style={{
                 padding: '10px 14px', background: 'transparent',
                 color: '#C0392B', border: '1.5px solid #FACACA',
@@ -98,7 +97,6 @@ function HomeDonante() {
           </div>
         </div>
 
-        {/* STATS */}
         <div>
           <div style={{ fontSize: '11px', fontWeight: '500', textTransform: 'uppercase', letterSpacing: '1.5px', color: '#7A4528', opacity: 0.6, marginBottom: '8px' }}>
             Tu impacto
@@ -125,8 +123,8 @@ function HomeDonante() {
         borderTop: '1px solid #F2E8D5',
         display: 'flex', alignItems: 'center', justifyContent: 'space-around'
       }}>
-        {[['🏠', 'Inicio', true], ['🗺️', 'Mapa', false], ['🔔', 'Alertas', false], ['👤', 'Perfil', false]].map(([icon, label, active]) => (
-          <div key={label} style={{
+        {[['🏠', 'Inicio', '/home', true], ['🗺️', 'Mapa', '/mapa', false], ['🔔', 'Alertas', '/alertas', false], ['👤', 'Perfil', '/perfil', false]].map(([icon, label, path, active]) => (
+          <div key={label} onClick={() => navigate(path)} style={{
             display: 'flex', flexDirection: 'column', alignItems: 'center',
             gap: '2px', opacity: active ? 1 : 0.3, cursor: 'pointer', flex: 1
           }}>
